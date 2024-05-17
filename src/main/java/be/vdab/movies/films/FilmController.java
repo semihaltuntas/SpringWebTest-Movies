@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @RestController
@@ -22,10 +23,11 @@ public class FilmController {
         }
     }
 
-    private record IdTitelVoorraadGereserveerdMetBeschikbaar(long id, String titel, int voorraad, int gereserveerd, int beschikbaar) {
+    private record IdTitelVoorraadGereserveerdMetBeschikbaar(long id, String titel, int voorraad, int gereserveerd,
+                                                             BigDecimal prijs, int beschikbaar) {
         IdTitelVoorraadGereserveerdMetBeschikbaar(Film film) {
             this(film.getId(), film.getTitel(), film.getVoorraad(), film.getGereserveerd(),
-                    film.getVoorraad() - film.getGereserveerd());
+                    film.getPrijs(),film.getVoorraad() - film.getGereserveerd());
         }
     }
 

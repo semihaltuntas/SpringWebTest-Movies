@@ -10,7 +10,7 @@ if (response.ok) {
     for (let i = 0; i < genres.length; i++) {
         const genre = genres[i];
         const hyperlink = document.createElement("a");
-        hyperlink.href = "#";
+        hyperlink.href = `#`;
         hyperlink.innerText = `${genre.naam}`;
         hyperlink.onclick = function () {
             const genreNaam = `${genre.naam}`;
@@ -45,5 +45,7 @@ const findAllFilmsByGenre = async (id) => {
             aTag.appendChild(imgFoto)
             filmDiv.appendChild(aTag);
         }
+    }else{
+        toon("storing")
     }
 }

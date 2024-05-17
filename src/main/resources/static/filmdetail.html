@@ -7,13 +7,31 @@
     <link rel="stylesheet" href="css/movies.css">
 </head>
 <body>
-<h1><span id="filmId"></span></h1>
-<ul id="film"></ul>
-<div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
+<div id="film" hidden>
+    <h1 id="filmTitel"></h1>
+    <img id="filmImage">
+
+    <dl>
+        <dt>Prijs</dt>
+        <dd id="prijs"></dd>
+        <dt>Voorraad</dt>
+        <dd id="voorraad"></dd>
+        <dt>Gereserveerd</dt>
+        <dd id="gereserveerd">
+        </dd><dt>Beschikbaar</dt>
+        <dd id="beschikbaar"></dd>
+    </dl>
+
+    <button id="mandje">In mandje</button>
+
+    <div id="storing" class="fout" hidden>Storing, contacteer helpdesk.</div>
+    <br>
+    <div> <a href="index.html">Startpagina</a></div>
+
+</div>
 
 
-<div id="films"></div>
-
+<div id="nietGevonden" class="fout" hidden>Film niet gevonden.</div>
 </body>
 
 </html>
