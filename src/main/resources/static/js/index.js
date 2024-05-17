@@ -32,7 +32,7 @@ const findAllFilmsByGenre = async (id) => {
     const response = await fetch(`films?genreId=${id}`);
     if (response.ok) {
         const films = await response.json()
-        sessionStorage.setItem("films",JSON.stringify(films))
+
         const filmDiv = document.getElementById('films');
         filmDiv.innerHTML = '';
         for (let film of films) {
@@ -42,6 +42,9 @@ const findAllFilmsByGenre = async (id) => {
             const imgFoto = document.createElement('img');
             imgFoto.alt = film.titel;
             imgFoto.src = `./images/${film.id}.jpg`;
+            imgFoto.onclick = () =>{
+                sessionStorage.setItem("filmStorage",JSON.stringify(film))
+            }
             aTag.appendChild(imgFoto)
             filmDiv.appendChild(aTag);
         }
