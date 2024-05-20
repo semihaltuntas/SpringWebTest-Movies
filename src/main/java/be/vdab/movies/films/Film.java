@@ -7,7 +7,7 @@ public class Film {
     private final int genreId;
     private final String titel;
     private final int voorraad;
-    private final int gereserveerd;
+    private int gereserveerd;
     private final BigDecimal prijs;
 
     public Film(long id, int genreId, String titel, int voorraad, int gereserveerd, BigDecimal prijs) {
@@ -43,5 +43,10 @@ public class Film {
         return prijs;
     }
 
-
+    void reserveer() {
+        if (voorraad <= gereserveerd) {
+            throw new OnvoldoendeVoorraadException();
+        }
+        gereserveerd -= 1;
+    }
 }
