@@ -1,9 +1,7 @@
 package be.vdab.movies.films;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import jakarta.validation.Valid;
+import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -44,5 +42,9 @@ public class FilmController {
         return filmService.findByIdWithBeschikbaar(id)
                 .map(film -> new IdTitelVoorraadGereserveerdMetBeschikbaar(film))
                 .orElseThrow(() -> new FilmNietGevondenException(id));
+    }
+    @PostMapping("{filmId}/reservaties")
+    void reserveer(@PathVariable long filmId, @RequestBody @Valid NieuweKlantMetKlantId klantMetKlantId){
+        filmService.reserveer(filmId,klantMetKlantId);
     }
 }

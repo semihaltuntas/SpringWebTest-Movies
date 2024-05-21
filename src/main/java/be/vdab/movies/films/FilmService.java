@@ -1,9 +1,11 @@
 package be.vdab.movies.films;
 
+import be.vdab.movies.reservaties.Reservatie;
 import be.vdab.movies.reservaties.ReservatieRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,5 +26,14 @@ public class FilmService {
 
     public Optional<Film> findByIdWithBeschikbaar(long id) {
         return filmRepository.findByIdWithBeschikbaar(id);
+    }
+    @Transactional
+    void reserveer (long filmId, NieuweKlantMetKlantId klantMetKlantId){
+        var reservatie = new Reservatie(klantMetKlantId.klantId(),filmId, LocalDateTime.now());
+        var film = filmRepository.findAndLockById(filmId).orElseThrow(
+                ()->new FilmNietGevondenException(filmId));
+        film.reserveer();
+        filmRepository.updateGereserveerd(filmId);
+        reservatieRepository.create(reservatie);
     }
 }

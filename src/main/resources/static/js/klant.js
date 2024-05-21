@@ -33,7 +33,7 @@ async function findByWoord(woord) {
             klantNaamVoornaamCell.innerText = klant.familienaam + " " + klant.voornaam;
             klantNaamVoornaamCell.addEventListener('click', function () {
                 window.location.href = 'bevestig.html?id=' + klant.id;
-                sessionStorage.setItem("klantDatas", JSON.stringify(klant))
+                sessionStorage.setItem("klantStorage", JSON.stringify(klant))
             });
             tr.insertCell().innerText = klant.straatNummer;
             tr.insertCell().innerText = klant.postcode;

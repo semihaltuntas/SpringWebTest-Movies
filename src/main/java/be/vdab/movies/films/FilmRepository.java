@@ -55,13 +55,13 @@ public class FilmRepository {
                 .optional();
     }
 
-    void updateGereserveerd(long id, int gereserveerd) {
+    void updateGereserveerd(long id) {
         var sql = """
                 update films
                 set gereserveerd = gereserveerd + 1
                 where id = ? and (voorraad - films.gereserveerd) >= 1
                 """;
-        if (jdbcClient.sql(sql).params(gereserveerd, id).update() == 0) {
+        if (jdbcClient.sql(sql).params(id).update() == 0) {
             logger.info("update poging van onbestaande film {}", id);
             throw new FilmNietGevondenException(id);
         }
