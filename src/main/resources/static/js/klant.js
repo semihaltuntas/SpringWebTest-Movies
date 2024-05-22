@@ -16,6 +16,7 @@ function verbergPizzasEnFouten() {
     verberg("klantenTable");
     verberg("woordFout");
     verberg("storing");
+    verberg("geenResultaten");
 }
 
 async function findByWoord(woord) {
@@ -27,17 +28,24 @@ async function findByWoord(woord) {
         const klantenBody = byId("klantenBody");
         console.log(klantenBody)
         verwijderChildElementenVan(klantenBody);
-        for (const klant of klanten) {
-            const tr = klantenBody.insertRow();
-            const klantNaamVoornaamCell = tr.insertCell();
-            klantNaamVoornaamCell.innerText = klant.familienaam + " " + klant.voornaam;
-            klantNaamVoornaamCell.addEventListener('click', function () {
-                window.location.href = 'bevestig.html?id=' + klant.id;
-                sessionStorage.setItem("klantStorage", JSON.stringify(klant))
-            });
-            tr.insertCell().innerText = klant.straatNummer;
-            tr.insertCell().innerText = klant.postcode;
-            tr.insertCell().innerText = klant.gemeente;
+
+        if (klanten.length === 0) {
+            toon("geenResultaten");
+            verberg("KlantenTable");
+        } else {
+            for (const klant of klanten) {
+                toon("klantenTable");
+                const tr = klantenBody.insertRow();
+                const klantNaamVoornaamCell = tr.insertCell();
+                klantNaamVoornaamCell.innerText = klant.familienaam + " " + klant.voornaam;
+                klantNaamVoornaamCell.addEventListener('click', function () {
+                    window.location.href = 'bevestig.html?id=' + klant.id;
+                    sessionStorage.setItem("klantStorage", JSON.stringify(klant))
+                });
+                tr.insertCell().innerText = klant.straatNummer;
+                tr.insertCell().innerText = klant.postcode;
+                tr.insertCell().innerText = klant.gemeente;
+            }
         }
     } else {
         toon("storing");

@@ -17,8 +17,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     bevestigBtn.addEventListener('click', async () => {
         const klantId = klantDatas.id;
-        bevestigBtn.disabled = true;
         const mandjeTag = byId("mandje")
+
+        bevestigBtn.disabled = true;
         mandjeTag.hidden=true;
         verwijderChildElementenVan(reservatieStatusUl);
 
@@ -37,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } else {
                 switch (response.status) {
                     case 404:
-                        toon("nietGevonden");
+                        toon("nietGevonden"); //Ik denk niet dat er een kans is dat we de film hier niet kunnen vinden.:))
                         break;
                     case 409:
                         const responseBody = await response.json();
