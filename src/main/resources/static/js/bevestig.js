@@ -1,5 +1,5 @@
 "use strict";
-import {byId, toon, verberg, setText, verwijderChildElementenVan} from "./util.js";
+import {byId, toon, setText, verwijderChildElementenVan} from "./util.js";
 
 const mandjeDatas = JSON.parse(sessionStorage.getItem("mandjeStorage"));
 const klantDatas = JSON.parse(sessionStorage.getItem("klantStorage"));
@@ -13,14 +13,14 @@ document.addEventListener('DOMContentLoaded', () => {
         bevestigBtn.disabled = true;
         return;
     }
-    bevestigH2element.textContent = `${mandjeDatas.length} film(s) voor ${klantDatas.familienaam +" "+ klantDatas.voornaam}`
+    bevestigH2element.textContent = `${mandjeDatas.length} film(s) voor ${klantDatas.familienaam + " " + klantDatas.voornaam}`
 
     bevestigBtn.addEventListener('click', async () => {
         const klantId = klantDatas.id;
         const mandjeTag = byId("mandje")
 
         bevestigBtn.disabled = true;
-        mandjeTag.hidden=true;
+        mandjeTag.hidden = true;
         verwijderChildElementenVan(reservatieStatusUl);
 
         for (const film of mandjeDatas) {
@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (response.ok) {
                 listItem.textContent = `${film.titel}: OK`;
                 reservatieStatusUl.appendChild(listItem);
-               // console.log(listItem)
+                // console.log(listItem)
             } else {
                 switch (response.status) {
                     case 404:

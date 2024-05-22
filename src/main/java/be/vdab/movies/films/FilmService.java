@@ -27,11 +27,12 @@ public class FilmService {
     public Optional<Film> findByIdWithBeschikbaar(long id) {
         return filmRepository.findByIdWithBeschikbaar(id);
     }
+
     @Transactional
-    void reserveer (long filmId, NieuweKlantMetKlantId klantMetKlantId){
-        var reservatie = new Reservatie(klantMetKlantId.klantId(),filmId, LocalDateTime.now());
+    void reserveer(long filmId, NieuweKlantMetKlantId klantMetKlantId) {
+        var reservatie = new Reservatie(klantMetKlantId.klantId(), filmId, LocalDateTime.now());
         var film = filmRepository.findAndLockById(filmId).orElseThrow(
-                ()->new FilmNietGevondenException(filmId));
+                () -> new FilmNietGevondenException(filmId));
         film.reserveer();
         filmRepository.updateGereserveerd(filmId);
         reservatieRepository.create(reservatie);

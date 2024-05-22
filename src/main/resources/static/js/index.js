@@ -14,7 +14,7 @@ if (response.ok) {
         hyperlink.innerText = `${genre.naam}`;
         hyperlink.onclick = function () {
             const genreNaam = `${genre.naam}`;
-            setText("genreId",genreNaam);
+            setText("genreId", genreNaam);
             findAllFilmsByGenre(genre.id);
         }
         li.appendChild(hyperlink);
@@ -32,23 +32,22 @@ const findAllFilmsByGenre = async (id) => {
     const response = await fetch(`films?genreId=${id}`);
     if (response.ok) {
         const films = await response.json()
-
-        const filmDiv = document.getElementById('films');
+        const filmDiv = byId('films');
         filmDiv.innerHTML = '';
         for (let film of films) {
             // console.log(film)
             const aTag = document.createElement('a');
-            aTag.href ='filmdetail.html?id=' + film.id;
+            aTag.href = 'filmdetail.html?id=' + film.id;
             const imgFoto = document.createElement('img');
             imgFoto.alt = film.titel;
             imgFoto.src = `./images/${film.id}.jpg`;
-            imgFoto.onclick = () =>{
-                sessionStorage.setItem("filmStorage",JSON.stringify(film))
+            imgFoto.onclick = () => {
+                sessionStorage.setItem("filmStorage", JSON.stringify(film))
             }
             aTag.appendChild(imgFoto)
             filmDiv.appendChild(aTag);
         }
-    }else{
+    } else {
         toon("storing")
     }
 }

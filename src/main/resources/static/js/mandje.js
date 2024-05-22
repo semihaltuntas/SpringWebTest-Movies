@@ -1,6 +1,6 @@
 "use strict";
 
-import {byId, setText, toon, verberg} from "./util.js";
+import {byId} from "./util.js";
 
 const mandjeDatas= JSON.parse(sessionStorage.getItem("mandjeStorage"))
 const mandjeBody = byId("mandjeBody")

@@ -1,5 +1,4 @@
 "use strict";
-
 import {byId, setText, toon, verberg} from "./util.js";
 
 async function verbergFilmEnFouten() {
@@ -10,9 +9,9 @@ async function verbergFilmEnFouten() {
 verbergFilmEnFouten();
 
 const queryString = window.location.search;
-console.log(queryString);
+//console.log(queryString);
 const urlParams = new URLSearchParams(queryString);
-console.log(urlParams)
+//console.log(urlParams)
 const idVanFilm = urlParams.get('id')
 console.log(idVanFilm)
 

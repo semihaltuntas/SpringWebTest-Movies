@@ -44,7 +44,7 @@ public class FilmController {
                 .orElseThrow(() -> new FilmNietGevondenException(id));
     }
     @PostMapping("{filmId}/reservaties")
-    void reserveer(@PathVariable long filmId, @RequestBody @Valid NieuweKlantMetKlantId klantMetKlantId){
-        filmService.reserveer(filmId,klantMetKlantId);
+    void reserveer(@PathVariable long filmId, @RequestBody @Valid NieuweKlantMetKlantId klantId){
+        filmService.reserveer(filmId,klantId);
     }
 }

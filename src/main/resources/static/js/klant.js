@@ -23,10 +23,8 @@ async function findByWoord(woord) {
     const response = await fetch(`klanten?naamBevat=${woord}`);
     if (response.ok) {
         const klanten = await response.json();
-        console.log(klanten)
-        toon("klantenTable");
+       // console.log(klanten)
         const klantenBody = byId("klantenBody");
-        console.log(klantenBody)
         verwijderChildElementenVan(klantenBody);
 
         if (klanten.length === 0) {
@@ -38,10 +36,12 @@ async function findByWoord(woord) {
                 const tr = klantenBody.insertRow();
                 const klantNaamVoornaamCell = tr.insertCell();
                 klantNaamVoornaamCell.innerText = klant.familienaam + " " + klant.voornaam;
-                klantNaamVoornaamCell.addEventListener('click', function () {
+                klantNaamVoornaamCell.style.textDecoration = "underline";
+                klantNaamVoornaamCell.onclick = function () {
                     window.location.href = 'bevestig.html?id=' + klant.id;
-                    sessionStorage.setItem("klantStorage", JSON.stringify(klant))
-                });
+                    sessionStorage.setItem("klantStorage", JSON.stringify(klant));
+                };
+
                 tr.insertCell().innerText = klant.straatNummer;
                 tr.insertCell().innerText = klant.postcode;
                 tr.insertCell().innerText = klant.gemeente;
