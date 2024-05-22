@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
         verwijderChildElementenVan(reservatieStatusUl);
 
         for (const film of mandjeDatas) {
+            console.log(film)
             const response = await fetch(`films/${film.id}/reservaties`, {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
@@ -42,13 +43,13 @@ document.addEventListener('DOMContentLoaded', () => {
                         break;
                     case 409:
                         const responseBody = await response.json();
-                        setText("conflict", responseBody.message);
+                        const conflictMessage = `${film.titel}: ${responseBody.message}`
+                        setText("conflict", conflictMessage);
                         toon("conflict");
                         break;
                     default:
                         toon("storing");
                 }
-                reservatieStatusUl.appendChild(listItem);
             }
         }
         sessionStorage.removeItem("mandjeStorage");
